@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav {
+            color: #fff;
+            height: 25px;
+            padding-left: 150px;
+            background-color: #007b09;
+        }
+        .nav span {
+            cursor: pointer;
+        }
+        .nav span:hover {
+            color: greenyellow;
+        }
+        .box {
+            position: absolute;
+            width: 500px;
+            height: 350px;
+            border: 1px solid #ccc;
+            top: 50%;
+            left: 50%;
+            margin-left: -250px;
+            margin-top: -175px;
+            display: none;
+        }
+        .box .nav {
+            padding-left: 20px;
+            cursor: move;
+        }
+        .box .nav span {
+            margin-left: 390px;
+        }
+    </style>
+</head>
+<body>
+<div class="nav" id="nav">
+    <span>立即登录</span>
+</div>
+<div class="box" id="box">
+    <div class="nav" id="move_nav">登录
+    <span id="close">取消</span></div>
+</div>
+</body>
+</html>
+<script>
+    var span = document.getElementById("nav").children[0];
+    var move_nav = document.getElementById("move_nav");
+    var box = document.getElementById("box");
+    var close = document.getElementById("close");
+    close.onclick = function () {
+        box.style.display = "none";
+    }
+    span.onclick =function () {
+        box.style.display = "block";
+    }
+    move_nav.onmousedown = function (event) {
+        var x = event.clientX - box.offsetLeft - 250;
+        var y = event.clientY - box.offsetTop - 175;
+        document.onmousemove = function (event) {
+            var event = event || window.event;
+            box.style.left = event.clientX - x +"px";
+            box.style.top = event.clientY - y +"px";
+            window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+
+        }
+        document.onmouseup = function () {
+            document.onmousemove = null;
+        }
+
+    }
+</script>

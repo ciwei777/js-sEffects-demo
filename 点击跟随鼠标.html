@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #img1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 88px;
+        }
+    </style>
+</head>
+<body>
+<img src="images/img.jpg" alt="" id="img1">
+</body>
+</html>
+<script>
+    var img1 = document.getElementById("img1");
+    var leader_x = 0,
+        leader_y = 0,
+        target_x = 0,
+        target_y = 0;
+    var timer = null ;
+    document.onclick = function (event) {
+        clearInterval(timer);
+           target_x = event.clientX;
+          target_y = event.clientY;
+        timer = setInterval(function () {
+            leader_x = leader_x + (target_x - leader_x)/30;
+            leader_y = leader_y + (target_y - leader_y)/30;
+            img1.style.left = leader_x + "px";
+            img1.style.top = leader_y + "px";
+        },10)
+    }
+</script>
